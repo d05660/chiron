@@ -1,4 +1,4 @@
-package org.cloud.chiron;
+package org.cloud.chiron.app;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
