@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : cloud
+ Source Server         : db.cloud.org
  Source Server Type    : MySQL
- Source Server Version : 80016
- Source Host           : 192.168.1.200:3306
+ Source Server Version : 50724
+ Source Host           : db.cloud.org:3306
  Source Schema         : mydb
 
  Target Server Type    : MySQL
- Target Server Version : 80016
+ Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 21/06/2019 22:56:35
+ Date: 27/06/2019 15:06:23
 */
 
 SET NAMES utf8mb4;
@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `sys_permissions`;
 CREATE TABLE `sys_permissions`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `permission` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `description` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `description` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_permissions
@@ -43,7 +43,7 @@ DROP TABLE IF EXISTS `sys_roles`;
 CREATE TABLE `sys_roles`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `role` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `description` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `description` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
@@ -84,11 +84,11 @@ CREATE TABLE `sys_users`  (
   `username` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `password` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
-  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `last_login_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `create_time` datetime NULL DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `last_login_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `create_time` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_users
@@ -123,9 +123,9 @@ DROP TABLE IF EXISTS `t_dept`;
 CREATE TABLE `t_dept`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `description` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `description` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_dept
@@ -146,13 +146,13 @@ CREATE TABLE `t_emp`  (
   `username` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `password` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `department` int(20) NOT NULL,
-  `tel` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `email` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `tel` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `email` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `department`(`department`) USING BTREE,
   CONSTRAINT `t_emp_ibfk_1` FOREIGN KEY (`department`) REFERENCES `t_dept` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 113 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_emp
@@ -276,7 +276,7 @@ CREATE TABLE `t_employee`  (
   `address` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `age` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_employee
@@ -294,23 +294,23 @@ CREATE TABLE `t_menu`  (
   `menu_id` int(11) NOT NULL AUTO_INCREMENT,
   `menu_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `icon` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `icon` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `level` int(11) NOT NULL DEFAULT 1,
   `parent_id` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_menu
 -- ----------------------------
 INSERT INTO `t_menu` VALUES (1, '人事管理', '#', 'layui-icon-picker-securityscan', 1, 0);
-INSERT INTO `t_menu` VALUES (2, '雇员管理', '/admin/empView', NULL, 1, 1);
-INSERT INTO `t_menu` VALUES (3, '部门管理', '/admin/deptView', NULL, 1, 1);
+INSERT INTO `t_menu` VALUES (2, '雇员管理', '/system/empView', NULL, 1, 1);
+INSERT INTO `t_menu` VALUES (3, '部门管理', '/system/deptView', NULL, 1, 1);
 INSERT INTO `t_menu` VALUES (4, '系统管理', '#', 'layui-icon-picker-control', 1, 0);
-INSERT INTO `t_menu` VALUES (5, '系统信息', '/admin/systemInfo', 'null', 1, 4);
-INSERT INTO `t_menu` VALUES (6, '在线用户', '/admin/userOnline', NULL, 1, 4);
-INSERT INTO `t_menu` VALUES (7, '操作日志', '/admin/syslog', NULL, 1, 4);
-INSERT INTO `t_menu` VALUES (8, '用户管理', '/admin/userView', NULL, 1, 4);
+INSERT INTO `t_menu` VALUES (5, '系统信息', '/system/systemInfo', 'null', 1, 4);
+INSERT INTO `t_menu` VALUES (6, '在线用户', '/system/userOnline', NULL, 1, 4);
+INSERT INTO `t_menu` VALUES (7, '操作日志', '/system/syslog', NULL, 1, 4);
+INSERT INTO `t_menu` VALUES (8, '用户管理', '/system/userView', NULL, 1, 4);
 
 -- ----------------------------
 -- Table structure for t_sys_log
@@ -318,13 +318,13 @@ INSERT INTO `t_menu` VALUES (8, '用户管理', '/admin/userView', NULL, 1, 4);
 DROP TABLE IF EXISTS `t_sys_log`;
 CREATE TABLE `t_sys_log`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
-  `operation` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作',
-  `time` int(11) NULL DEFAULT NULL COMMENT '响应时间/耗时',
-  `method` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求方法',
-  `params` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求参数',
-  `ip` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'IP',
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '用户名',
+  `operation` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '操作',
+  `time` int(11) DEFAULT NULL COMMENT '响应时间/耗时',
+  `method` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '请求方法',
+  `params` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '请求参数',
+  `ip` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'IP',
+  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '操作日志表' ROW_FORMAT = Dynamic;
 

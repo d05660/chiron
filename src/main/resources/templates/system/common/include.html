@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 通用CSS -->
+<head th:fragment=header(title)>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title th:text="${title}"></title>
+    <link rel="icon" th:href="@{/static/favicon.ico}" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{/webjars/layui/2.4.5/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/zadmin.css}">
+    <link rel="stylesheet" th:href="@{/static/css/common.css}">
+    <link rel="stylesheet" th:href="@{/static/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/formSelects-v4.css}">
+</head>
+
+<!-- peity图表组合插件 -->
+<div th:fragment="chiron-js">
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/layui/2.4.5/layui.js}"></script>
+    <script th:src="@{/static/js/common.js}"></script>
+</div>
+</html>

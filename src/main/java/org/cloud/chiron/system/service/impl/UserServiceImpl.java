@@ -12,7 +12,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
-import org.cloud.chiron.common.base.BaseServiceImpl;
+import org.cloud.chiron.framework.core.BaseServiceImpl;
 import org.cloud.chiron.common.util.IPUtils;
 import org.cloud.chiron.common.util.PasswordUtils;
 import org.cloud.chiron.system.mapper.RoleMapper;
@@ -112,13 +112,13 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
             userOnline.setIp(IPUtils.getIpAddr());
             userOnline.setStartTimestamp(session.getStartTimestamp());
             userOnline.setLastAccessTime(session.getLastAccessTime());
-            long timeout = session.getTimeout();
-            if (timeout == 0L) {
+            long expireTime = session.getTimeout();
+            if (expireTime == 0L) {
                 userOnline.setStatus("离线");
             } else {
                 userOnline.setStatus("在线");
             }
-            userOnline.setTimeout(timeout);
+            userOnline.setExpireTime(expireTime);
             list.add(userOnline);
         }
         return list;

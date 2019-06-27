@@ -14,6 +14,6 @@ public class ActionApplication {
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(ActionApplication.class);
         application.run(args);
-        logger.info("============= SpringBoot Start Success =============");
+        logger.info("============= SpringChiron Start Success =============");
     }
 }

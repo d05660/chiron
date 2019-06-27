@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.cloud.chiron.common.base.BaseServiceImpl;
+import org.cloud.chiron.framework.core.BaseServiceImpl;
 import org.cloud.chiron.system.mapper.PermissionMapper;
 import org.cloud.chiron.system.model.Permission;
 import org.cloud.chiron.system.service.IPermissionService;

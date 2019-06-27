@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.cloud.chiron.common.base.BaseServiceImpl;
+import org.cloud.chiron.framework.core.BaseServiceImpl;
 import org.cloud.chiron.system.mapper.EmpMapper;
 import org.cloud.chiron.system.model.Emp;
 import org.cloud.chiron.system.service.IEmpService;

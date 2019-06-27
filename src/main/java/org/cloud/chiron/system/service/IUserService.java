@@ -3,7 +3,7 @@ package org.cloud.chiron.system.service;
 import java.util.List;
 import java.util.Set;
 
-import org.cloud.chiron.common.base.BaseService;
+import org.cloud.chiron.framework.core.BaseService;
 import org.cloud.chiron.system.model.User;
 import org.cloud.chiron.system.vo.UserOnline;
 

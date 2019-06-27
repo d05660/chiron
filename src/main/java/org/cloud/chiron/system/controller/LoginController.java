@@ -9,9 +9,9 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.cloud.chiron.common.annotation.CsrfToken;
-import org.cloud.chiron.common.base.BaseController;
 import org.cloud.chiron.common.util.ResultBean;
+import org.cloud.chiron.framework.annotation.CsrfToken;
+import org.cloud.chiron.framework.core.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/system")
 public class LoginController extends BaseController {
 
     /**
@@ -77,12 +77,12 @@ public class LoginController extends BaseController {
      * 
      * @return {String}
      */
-    @GetMapping("/unauth")
+    @GetMapping("/403")
     public String unauth() {
         if (SecurityUtils.getSubject().isAuthenticated() == false) {
-            return "redirect:/login";
+            return "redirect:/system/login";
         }
-        return "unauth";
+        return "error/403";
     }
 
     /**

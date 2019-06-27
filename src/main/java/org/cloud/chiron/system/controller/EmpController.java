@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
-import org.cloud.chiron.common.annotation.OperationLog;
+import org.cloud.chiron.framework.annotation.OperationLog;
 import org.cloud.chiron.common.util.PageResultBean;
 import org.cloud.chiron.common.util.ResultBean;
 import org.cloud.chiron.system.model.Emp;

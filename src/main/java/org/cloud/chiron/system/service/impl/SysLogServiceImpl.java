@@ -2,7 +2,7 @@ package org.cloud.chiron.system.service.impl;
 
 import javax.annotation.Resource;
 
-import org.cloud.chiron.common.base.BaseServiceImpl;
+import org.cloud.chiron.framework.core.BaseServiceImpl;
 import org.cloud.chiron.system.mapper.SysLogMapper;
 import org.cloud.chiron.system.model.SysLog;
 import org.cloud.chiron.system.service.ISysLogService;

@@ -1,7 +1,7 @@
 package org.cloud.chiron.system.mapper;
 
 import org.apache.ibatis.annotations.Param;
-import org.cloud.chiron.common.base.BaseMapper;
+import org.cloud.chiron.framework.core.BaseMapper;
 import org.cloud.chiron.system.model.User;
 
 public interface UserMapper extends BaseMapper<User> {

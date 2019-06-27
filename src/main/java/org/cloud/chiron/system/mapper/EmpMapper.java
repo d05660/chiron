@@ -3,7 +3,7 @@ package org.cloud.chiron.system.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.cloud.chiron.common.base.BaseMapper;
+import org.cloud.chiron.framework.core.BaseMapper;
 import org.cloud.chiron.system.model.Emp;
 
 public interface EmpMapper extends BaseMapper<Emp> {
