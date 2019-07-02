@@ -3,41 +3,52 @@ package org.cloud.chiron.common.util;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class CommandLine implements Serializable {
 
     private static final long serialVersionUID = 8610513714180851399L;
-    private Date dateTimeDate;
-    private String commandString;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonProperty("date")
+    private Date date;
+
+    @JsonProperty("command")
+    private String command;
 
     public CommandLine() {
 
     }
 
-    public CommandLine(String commandString) {
+    public CommandLine(String command) {
         super();
-        this.dateTimeDate = new Date();
-        this.commandString = commandString;
+        this.date = new Date();
+        this.command = command;
     }
 
-    public Date getDateTimeDate() {
-        return dateTimeDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDateTimeDate(Date dateTimeDate) {
-        this.dateTimeDate = dateTimeDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public String getCommandString() {
-        return commandString;
+    public String getCommand() {
+        return command;
     }
 
-    public void setCommandString(String commandString) {
-        this.commandString = commandString;
+    public void setCommand(String command) {
+        this.command = command;
     }
 
     @Override
     public String toString() {
-        return "CommandLine [dateTimeDate=" + dateTimeDate + ", commandString=" + commandString + "]";
+        return "CommandLine [date=" + date + ", command=" + command + "]";
     }
 
 }

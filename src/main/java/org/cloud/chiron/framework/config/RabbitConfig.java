@@ -71,6 +71,7 @@ public class RabbitConfig {
         factory.setConcurrentConsumers(1);
         factory.setMaxConcurrentConsumers(1);
         factory.setPrefetchCount(1);
+        factory.setMessageConverter(new Jackson2JsonMessageConverter());
         factory.setTxSize(1);
         factory.setAcknowledgeMode(AcknowledgeMode.AUTO);
         return factory;
@@ -94,28 +95,30 @@ public class RabbitConfig {
     }
 
     @Bean
-    public Queue ipSenderQueue() {
-        return new Queue(env.getProperty("ip.queue.sender"), true);
+    public Queue commandSenderQueue() {
+        return new Queue(env.getProperty("command.queue.sender"), true);
     }
 
     @Bean
-    public Queue ipReceiverQueue() {
-        return new Queue(env.getProperty("ip.queue.receiver"), true);
+    public Queue commandReceiverQueue() {
+        return new Queue(env.getProperty("command.queue.receiver"), true);
     }
 
     @Bean
-    public DirectExchange ipExchange() {
-        return new DirectExchange(env.getProperty("ip.exchange.name"), true, false);
+    public DirectExchange commandExchange() {
+        return new DirectExchange(env.getProperty("command.exchange"), true, false);
     }
 
     @Bean
-    public Binding ipSenderBinding(Queue ipSenderQueue, DirectExchange ipExchange) {
-        return BindingBuilder.bind(ipSenderQueue).to(ipExchange).with(env.getProperty("ip.routing.key.sender"));
+    public Binding ipSenderBinding() {
+        return BindingBuilder.bind(commandSenderQueue()).to(commandExchange())
+                .with(env.getProperty("command.routing.key.sender"));
     }
 
     @Bean
-    public Binding ipReceiveBinding(Queue ipReceiverQueue, DirectExchange ipExchange) {
-        return BindingBuilder.bind(ipReceiverQueue).to(ipExchange).with(env.getProperty("ip.routing.key.receiver"));
+    public Binding ipReceiveBinding() {
+        return BindingBuilder.bind(commandReceiverQueue()).to(commandExchange())
+                .with(env.getProperty("command.routing.key.receiver"));
     }
 
 }

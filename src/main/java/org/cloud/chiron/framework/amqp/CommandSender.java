@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
-public class IPMessageSender {
+public class CommandSender {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -33,8 +33,8 @@ public class IPMessageSender {
     private void sendCommand(CommandLine commandLine) {
         try {
             rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
-            rabbitTemplate.setExchange(env.getProperty("ip.exchange.name"));
-            rabbitTemplate.setRoutingKey(env.getProperty("ip.routing.key.sender"));
+            rabbitTemplate.setExchange(env.getProperty("command.exchange"));
+            rabbitTemplate.setRoutingKey(env.getProperty("command.routing.key.sender"));
 
             Message message = MessageBuilder.withBody(objectMapper.writeValueAsBytes(commandLine))
                     .setDeliveryMode(MessageDeliveryMode.PERSISTENT).build();
