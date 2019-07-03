@@ -19,7 +19,7 @@ public class RabbitmqController {
     @GetMapping("/getipaddress")
     @ResponseBody
     public ResultBean sendIPCaller() {
-        CommandLine commandLine = new CommandLine("192.168.1.100");
+        CommandLine commandLine = new CommandLine("ip");
         ipMessageSender.sendExchangeMsg(commandLine);
         return ResultBean.success();
     }

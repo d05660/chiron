@@ -27,7 +27,6 @@ public class CommandReceiver {
     public void processMessage(Message message, Channel channel) {
         try {
             CommandLine commandLine = objectMapper.readValue(message.getBody(), CommandLine.class);
-            logger.info(commandLine.toString());
             logger.info("Receiving Message: IP address: {}, Time is: {}", commandLine.getCommand(),
                     commandLine.getDate());
         } catch (JsonParseException e) {

@@ -4,23 +4,31 @@
 import os, sys, time
 import pika
 import json
-import socket
+import subprocess
+
 
 def get_channel():
     credentials = pika.PlainCredentials('rabbitmq', 'rabbitmq')
-    parameters = pika.ConnectionParameters(host='db.cloud.org',
+    parameters = pika.ConnectionParameters(host='192.168.1.33',
                                            virtual_host='/',
                                            credentials=credentials)
     connection = pika.BlockingConnection(parameters)
     return connection.channel()
 
 
-def commandSender():
+def get_ipaddress():
+    ip_cmd_str = """
+ifconfig -a|grep -o -e 'inet [0-9]\{1,3\}.[0-9]\{1,3\}.[0-9]\{1,3\}.[0-9]\{1,3\}'|
+grep -v '127.0.0'|awk '{print $2}'"""
+    ret1=subprocess.check_output([ip_cmd_str], shell=True)
+    return ret1.decode('ascii').strip('\n')
+
+
+def ipCommandSender():
     channel = get_channel()
     channel.queue_declare(queue="local.command.queue.receiver", durable=True)
-    hostname = socket.gethostname()
-    ipaddr = socket.gethostbyname(hostname)
-    mess = {'command':ipaddr, 'date': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}
+    mess = {'command':get_ipaddress(), 'date': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}
+    print(mess)
     message = json.dumps(mess)
     channel.basic_publish(exchange='local.command.exchange',
                           routing_key='local.command.routing.key.receiver',
@@ -32,7 +40,6 @@ def commandSender():
                           ))
     print('send message: %s' %  message)
     channel.close()
-    #connection.close()	
 
 
 def Main():
@@ -46,7 +53,11 @@ def Main():
 
 def callback(ch, method, properties, body):
     print(" [x] %r:%r" % (method.routing_key, body))
-    commandSender()
+    print(body)
+    commander = json.loads(body)
+    print(commander)
+    if commander['command'] == 'ip':
+        ipCommandSender()
 
 
 if __name__ == '__main__':
